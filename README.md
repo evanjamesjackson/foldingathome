@@ -1,4 +1,4 @@
-My personal [folding@home](https://foldingathome.org/) Docker setup. The main difference between this setup and the official one is that this one installs a crontab, which I am using to adjust the power at certain times of the day.
+My personal [folding@home](https://foldingathome.org/) Docker setup. The main difference between this setup and the official one is that this installs a crontab, which I am using to adjust the power at certain times of the day.
 
 ## Setup
 1. Clone the repository.
