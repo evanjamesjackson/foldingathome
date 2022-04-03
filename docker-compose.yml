@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  foldingathome:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        - TZ=${TZ}
+    container_name: foldingathome
+    restart: unless-stopped
+    ports:
+      - 7396:7396
+      - 36330:36330
+    volumes:
+      - ./work:/var/lib/fahclient/work
+    environment:
+      IDENTITY: ${IDENTITY:-Anonymous}
+      TEAM: ${TEAM:-0}
+      CAUSE: ${CAUSE:-ANY}
+      POWER: ${POWER:-medium}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-127.0.0.1 0/0}
+
