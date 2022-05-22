@@ -9,15 +9,22 @@ services:
         - TZ=${TZ}
     container_name: foldingathome
     restart: unless-stopped
-    ports:
-      - 7396:7396
-      - 36330:36330
     volumes:
       - ./work:/var/lib/fahclient/work
+    networks:
+      - ${NGINX_PROXY_NETWORK}
     environment:
       IDENTITY: ${IDENTITY:-Anonymous}
       TEAM: ${TEAM:-0}
       CAUSE: ${CAUSE:-ANY}
       POWER: ${POWER:-medium}
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:-127.0.0.1 0/0}
+      # The following settings allow this container to work with nginx-proxy
+      VIRTUAL_HOST: ${DOMAIN_NAME}
+      LETSENCRYPT_HOST: ${DOMAIN_NAME}
+      VIRTUAL_PORT: 7396
 
+networks:
+  nginx_network:
+    name: ${NGINX_PROXY_NETWORK}
+    external: true 
